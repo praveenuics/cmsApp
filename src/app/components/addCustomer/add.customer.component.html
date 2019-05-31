@@ -1,0 +1,40 @@
+<div class="row container-fluid text-center">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+
+        <form [formGroup]="customerForm" novalidate>
+            <legend>Add Customer</legend>
+
+            <div class="form-group">
+                <label for="">First Name:</label>
+                <input type="text" class="form-control" id="" placeholder="First Name" formControlName="firstName">
+            </div>
+
+            <div class="form-group">
+                <label for="">Last Name:</label>
+                <input type="text" class="form-control" id="" placeholder="Last Name" formControlName="lastName">
+            </div>
+            <div class="form-group">
+                <label for="">Age:</label>
+                <input type="number" class="form-control" id="" placeholder="Age" formControlName="age">
+            </div>
+            <div class="form-group">
+                <label for="">Phone:</label>
+                <input type="text" class="form-control" id="" placeholder="Phone" formControlName="phone">
+            </div>
+            <div class="form-group">
+                <label for="">Email:</label>
+                <input type="text" class="form-control" id="" placeholder="E-mail" formControlName="email">
+            </div>
+            <div class="form-group">
+                <label for="">Image:</label>
+                <input type="text" class="form-control" id="" placeholder="Image URL" formControlName="image">
+            </div>
+
+            <button type="submit" class="btn btn-primary" (click)="submitForm()" [disabled]="!customerForm.valid">Submit</button>
+            <button type="submit" class="btn btn-primary" (click)="clearForm()">Reset</button>
+        </form>
+
+    </div>
+    <div class="col-lg-4"></div>
+</div>

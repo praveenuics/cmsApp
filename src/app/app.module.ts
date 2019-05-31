@@ -1,14 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { CustomerComponent } from './components/customer/customer.component';
+import { AddCustomerComponent } from './components/addCustomer/add.customer.component';
+import { AppHeaderComponent } from './components/appHeader/app.header.component';
+import { CustomersComponent } from './components/customers/customers.component';
+import { routes } from './app.routing';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, AppHeaderComponent,
+    CustomerComponent,
+    AddCustomerComponent, CustomersComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule, ReactiveFormsModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
