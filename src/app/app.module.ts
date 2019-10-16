@@ -8,6 +8,7 @@ import { AddCustomerComponent } from './components/addCustomer/add.customer.comp
 import { AppHeaderComponent } from './components/appHeader/app.header.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { routes } from './app.routing';
+import { CustomersService } from './components/customers/customers.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { routes } from './app.routing';
     BrowserModule, ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [CustomersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
