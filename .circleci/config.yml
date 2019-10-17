@@ -6,8 +6,9 @@ version: 2
 jobs:
   build:
     branches:
-         ignore: gh-pages
-         
+      ignore: 
+         - gh-pages
+
     docker:
       # specify the version you desire here
       - image: circleci/node:8-browsers
@@ -18,6 +19,10 @@ jobs:
       # - image: circleci/mongo:3.4.4
 
     working_directory: ~/repo
+
+    environment:
+     - SOURCE_BRANCH: master
+     - TARGET_BRANCH: gh-pages
 
     steps:
       - checkout
@@ -36,9 +41,41 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
+
       - run: yarn run prod
-      - run: yarn ngh
+      - deploy:
+      name: Deploy static pages to Github Pages
+      command: |
+        if [ "${CIRCLE_BRANCH}" = "master" ]; then
+          echo -e "Starting to deploy to Github Pages\n"
+          cd ~/repo
+          git config --global user.email "praveenk.padma@outlook.com"
+          git config --global user.name "praveenuics"
+          #using token clone gh-pages branch
+          git clone --quiet --branch=$CIRCLE_BRANCH https://8db1695a003432dd2d49a1e5dab2a7aa174134c9@github.com/$TARGET_BRANCH built_website > /dev/null
+          # Installing rsync
+          echo "Installing rsync"
+          sudo apt-get -y install rsync
+          #go into directory and copy data we're interested in to that directory
+          cd built_website
+          echo "rsync built code with checked out code..."
+          rsync -r --exclude=.git --delete ../$PELICAN_OUTPUT_FOLDER/ ./
+          #add, commit and push files
+          echo "add files to git..."
+          git add -f .
+          echo "commit files to git repository..."
+          if git commit -m "CircleCI build $CIRCLE_BUILD_NUM pushed to Github Pages" ; then
+            echo "git push files with force..."
+            git push -fq origin $BRANCH > /dev/null
+            echo -e "Deploy completed\n"
+          else
+            echo "Content not changed, nothing to deploy"
+          fi
+        else
+          echo "Not master branch, dry run only"
+        fi
+
+      # run tests!
 
 
 
