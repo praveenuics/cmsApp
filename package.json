@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "prod": "ng build --prod --base-href https://praveenuics.github.io/"
+    "prod": "ng build --prod --base-href https://praveenuics.github.io/cmsApp/"
   },
   "private": true,
   "dependencies": {
