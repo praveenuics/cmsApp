@@ -31,8 +31,9 @@
                 <input type="text" class="form-control" id="" placeholder="Image URL" formControlName="image">
             </div>
 
-            <button type="submit" class="btn btn-primary" (click)="submitForm()" [disabled]="!customerForm.valid">Submit</button>
-            <button type="submit" class="btn btn-primary" (click)="clearForm()">Reset</button>
+            <button type="submit" class="btn btn-secondary" (click)="clearForm()">Reset</button>
+            <button type="submit" class="btn btn-primary" (click)="submitForm()"
+                [disabled]="!customerForm.valid">Submit</button>
         </form>
 
     </div>
